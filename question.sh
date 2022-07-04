@@ -41,3 +41,18 @@
 #
 #  >>> Escriba su codigo a partir de este punto <<<
 #
+cat data.csv | 
+sed 's/\\//g' |
+sed 's/N/\\N/g' |
+sed 's/;$/;\\N/g' |
+sed 's/,/./g' | 
+sed 's/;;/;\\N;/g' | 
+sed 's/\\n/\\N/g' |
+sed 's/n/\\N/g' |
+sed 's/;/,/g' | 
+sed 's/[a-z]/\U&/g' |
+sed '12 s/\<[0-9]\>/0&/' | 
+sed '12 s/\<[0-9]\>/0&/' |
+sed 's/20\<[0-9]\>//g' | 
+sed '12 s/20//' | 
+sed 's/\([0-9][0-9]\)\/\([0-9][0-9]\)\/\([0-9][0-9]\)/20\3-\2-\1/g' > output.csv
